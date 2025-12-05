@@ -93,6 +93,10 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrdersByUserId(int userId) {
         return orderDao.findByUserId(userId);
     }
+    @Override
+    public List<Order> getOrdersBySellerId(int userId) {
+        return orderDao.findBySeller(userId);
+    }
 
     /**
      * Central place for updating order status

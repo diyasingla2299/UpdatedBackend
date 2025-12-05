@@ -211,7 +211,7 @@ public class UserController {
 
     // -------- Endpoints --------
 
-    @AllowedRoles({"ADMIN"})
+    @AllowedRoles({"ADMIN", "SELLER", "ADMIN"})
     @GetMapping("/{userId}")
     public UserDto getUserById(@PathVariable int userId, HttpServletRequest request) {
         validateUserOrAdmin(request, userId);

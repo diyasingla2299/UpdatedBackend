@@ -18,27 +18,27 @@ INSERT INTO products
 (user_id, category_id, product_name, product_price, product_mrp, product_quantity, 
  product_avg_rating, product_reviews_count, brand, description, image_url)
 VALUES
-(1, 1, 'Headphones', 1499.00, 1999.00, 50, 
+(2, 1, 'Headphones', 1499.00, 1999.00, 50, 
  0, 0, 'Boat', 
  'High-quality wireless headphones with deep bass and long battery backup.',
  'https://example.com/images/headphones.jpg'),
 
-(1, 1, 'Smart LED', 23999.00, 28999.00, 20, 
+(2, 1, 'Smart LED', 23999.00, 28999.00, 20, 
  0, 0, 'Samsung',
  '43-inch Full HD smart LED TV with powerful speakers.',
  'https://example.com/images/tv.jpg'),
 
-(1, 2, 'T-Shirt', 499.00, 799.00, 120, 
+(3, 2, 'T-Shirt', 499.00, 799.00, 120, 
  0, 0, 'H&M',
  'Soft and breathable cotton t-shirt for everyday wear.',
  'https://example.com/images/tshirt.jpg'),
 
-(1, 2, 'Shoes', 1999.00, 2499.00, 60, 
+(3, 2, 'Shoes', 1999.00, 2499.00, 60, 
  0, 0, 'Nike',
  'Lightweight and comfortable running shoes for daily workouts.',
  'https://example.com/images/shoes.jpg'),
 
-(1, 3, 'Java Programming', 899.00, 1099.00, 40, 
+(2, 3, 'Java Programming', 899.00, 1099.00, 40, 
  0, 0, 'Pearson',
  'Beginner-friendly Java programming book with examples.',
  'https://example.com/images/java_book.jpg'),

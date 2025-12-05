@@ -11,24 +11,7 @@ import jakarta.validation.constraints.NotNull;
 public class ProductDto {
 
 
-
-	
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-	public ProductDto(Integer product_id, @NotNull(message = "User Id is required") Integer userId,
+public ProductDto(Integer product_id, @NotNull(message = "User Id is required") Integer userId,
 			@NotNull(message = "Category Id is required") Integer categoryId,
 			@NotBlank(message = "Product name is required") String productName,
 			@NotNull(message = "Product Price is required") @DecimalMin(value = "0.0", message = "Product Price must be >=0.0") BigDecimal productPrice,
@@ -36,7 +19,7 @@ public class ProductDto {
 			@NotNull(message = "Product quantity is required") @Min(value = 1, message = "Product qsuantity must be >=1") int productQuantity,
 			@NotNull(message = "Product average rating is required") @DecimalMin(value = "0.0", message = "Product average rating must be >=0.0") BigDecimal productAvgRating,
 			@NotBlank(message = "Product Description is required") String productDescription,
-			@NotNull(message = "Product Reviews Count is required") @Min(value = 1, message = "Product Reviews Count must be >=1") Integer productReviewsCount,
+			@NotNull(message = "Product Reviews Count is required") @Min(value = 0, message = "Product Reviews Count must be >=0") Integer productReviewsCount,
 			String brand, String imageUrl) {
 		super();
 		this.product_id = product_id;
@@ -90,7 +73,7 @@ public class ProductDto {
 		private String productDescription;
 		
 		@NotNull(message  = "Product Reviews Count is required")
-		@Min(value = 1,message = "Product Reviews Count must be >=1")
+		@Min(value = 0,message = "Product Reviews Count must be >=0")
 		private Integer productReviewsCount;
 		
 

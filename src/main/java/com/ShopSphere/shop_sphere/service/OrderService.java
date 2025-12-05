@@ -17,7 +17,8 @@ public interface OrderService {
 	int placeOrder(int buyerId, int productId);
 	
 	int expireOldPendingOrders();
-
+    
 	List<Map<String, Object>> getOrdersWithItems(int userId);
 	List<Order> getAllOrders();
+	List<Order> getOrdersBySellerId(int userId);
 }

@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
 	private   UserDao  userDao;
 	
 	
-	@Override
+	/*@Override
 	public Product createProduct(Product product) {
 		if(product == null) {
 			throw new IllegalArgumentException("Product must not be null");
@@ -48,7 +48,49 @@ public class ProductServiceImpl implements ProductService {
 			throw new RuntimeException("Create failed for Product");
 		}
 		return product;
+	}*/
+	@Override
+	public Product createProduct(Product product) {
+	    if (product == null) {
+	        throw new IllegalArgumentException("Product must not be null");
+	    }
+
+	    // --------- SAFE DEFAULTS so INSERT doesn't break ----------
+	    if (product.getProductQuantity() == null) {
+	        product.setProductQuantity(0);
+	    }
+	    if (product.getProductAvgRating() == null) {
+	        product.setProductAvgRating(java.math.BigDecimal.ZERO);
+	    }
+	    if (product.getProductReviewsCount() == null) {
+	        product.setProductReviewsCount(0);
+	    }
+	    if (product.getImageUrl() == null) {
+	        product.setImageUrl(""); // or some default image URL
+	    }
+
+	    // --------- VALIDATE USER / ROLE ----------
+	    // product.getUserId() is set in SellerController before calling this
+	    User user = userDao.findById(product.getUserId());
+	    if (user == null) {
+	        throw new ResourceNotFoundException("User not found with id: " + product.getUserId());
+	    }
+
+	    if (!"SELLER".equalsIgnoreCase(user.getRole())) {
+	        throw new RuntimeException(
+	                "Only SELLER users can be assigned as product owner. Current role: " + user.getRole()
+	        );
+	    }
+
+	    // --------- SAVE PRODUCT ----------
+	    int rows = productDao.save(product);
+	    if (rows <= 0) {
+	        throw new RuntimeException("Create failed for Product");
+	    }
+
+	    return product;
 	}
+
 	
 	
 	

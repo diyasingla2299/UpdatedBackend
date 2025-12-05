@@ -119,7 +119,25 @@ public class OrderController {
     public int estimateDelivery(@RequestParam int buyerId, @RequestParam int productId) {
         return orderService.placeOrder(buyerId, productId);
     }
+    @AllowedRoles({"ADMIN","SELLER"})
+    @GetMapping
+    public ResponseEntity<List<OrderDto>> getAllOrders() {
+        List<Order> orders = orderService.getAllOrders();
+        List<OrderDto> dtoList = orders.stream()
+                                       .map(this::entityToDto)
+                                       .collect(Collectors.toList());
+        return ResponseEntity.ok(dtoList);
+    }
 
+    @AllowedRoles({"ADMIN","SELLER"})
+    @GetMapping("/seller/{sellerId}")
+    public ResponseEntity<List<OrderDto>> getOrdersBySellerId(@PathVariable int sellerId) {
+        List<Order> orders = orderService.getOrdersBySellerId(sellerId);
+        List<OrderDto> dtoList = orders.stream()
+                                       .map(this::entityToDto)
+                                       .collect(Collectors.toList());
+        return ResponseEntity.ok(dtoList);
+    }
     
     @AllowedRoles({"BUYER", "ADMIN","SELLER"})
     @GetMapping("/userOrder/{userId}")
@@ -134,9 +152,4 @@ public class OrderController {
     }
 }
 
-	
-	
-		
-		
-		
 	

@@ -17,6 +17,7 @@ import com.ShopSphere.shop_sphere.model.Order;
 import com.ShopSphere.shop_sphere.model.Product;
 import com.ShopSphere.shop_sphere.util.OrderRowMapper;
 import com.ShopSphere.shop_sphere.util.ProductRowMapper;
+import com.ShopSphere.shop_sphere.util.SellerOrderRowMapper;
 
 @Repository
 public class OrderDaoImpl implements OrderDao {
@@ -115,4 +116,34 @@ public class OrderDaoImpl implements OrderDao {
                 + "WHERE o.user_id = ?";
         return jdbcTemplate.queryForList(sql, userId);
     }
+    //@Override
+   /* public List<Order> findBySeller(int userId) {
+        String sql =
+            "SELECT o.order_id, o.user_id, o.total_amount, o.shipping_address, " +
+            "       o.placed_at, o.orderStatus, o.payment_method, " +
+            "       oi.product_name, oi.quantity, oi.unit_price " +
+            "FROM orders o " +
+            "JOIN order_items oi ON o.order_id = oi.order_id " +
+            "JOIN products p ON oi.product_id = p.product_id " +
+            "WHERE p.user_id = ? " +
+            "ORDER BY o.placed_at DESC";
+
+        return jdbcTemplate.query(sql, new OrderRowMapper(), userId);
+    }*/
+    @Override
+    public List<Order> findBySeller(int userId) {
+        String sql =
+            "SELECT o.* " +
+            "FROM orders o " +
+            "WHERE o.order_id IN ( " +
+            "  SELECT DISTINCT oi.order_id " +
+            "  FROM order_items oi " +
+            "  JOIN products p ON oi.product_id = p.product_id " +
+            "  WHERE p.user_id = ? " +
+            ") " +
+            "ORDER BY o.placed_at DESC";
+
+        return jdbcTemplate.query(sql, new OrderRowMapper(), userId);
+    }
+
 }

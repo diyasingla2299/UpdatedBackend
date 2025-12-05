@@ -68,3 +68,22 @@ VALUES
  20)alter table user modify phone varchar(50)  unique;
  21)alter table cart_items add column quantity int not null default 1;
  22)alter table orders modify shipping_address varchar(255);
+ -------------------4/12/25----------------------------------------------------
+ 23)INSERT INTO products 
+(user_id, category_id, product_name, product_price, product_mrp, product_quantity, 
+ product_avg_rating, product_reviews_count, brand, description, image_url)
+VALUES
+(3, 1, 'Camera', 2499.00, 2999.00, 4, 
+ 0, 0, 'Nikon', 
+ 'High-quality and high pixels, clafity with deep bass and long battery backup.',
+ 'https://example.com/images/camera.jpg');
+ 24)INSERT INTO user (name, email, password, phone, role, location_id)
+VALUES (
+    'Admin',
+    'admin@gmail.com',
+    '$2a$10$WqH14r2raXIiQunlslqY5OTtyEiZVikC6FzDaXYVCLxA4U6Q7vax.',
+    '9999999999',
+    'Admin',
+    NULL
+);
+update user set password='$2a$10$OefW5akOIXJz.4L4CTjYpebw8aIs7E9LU5YycSUu6KU6buFjVo5iC' where email="admin@gmail.com";

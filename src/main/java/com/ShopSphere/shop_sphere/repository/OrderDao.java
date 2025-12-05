@@ -23,5 +23,6 @@ public interface OrderDao {
 	int updateRazorpayOrderId(int orderId, String razorpayOrderId);
 	List<Map<String, Object>> getOrdersWithItems(int userId);
 	List<Order> findAll();
+	List<Order> findBySeller(int userId);
     
 }
